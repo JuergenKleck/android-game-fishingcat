@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FishingCat</string>
+  	<string name="btn_quit">Quit</string>
+  	<string name="btn_ok">OK</string>
+    <string name="btn_retry">Retry</string>
+    <string name="btn_reset">Reset</string>
+    <string name="btn_about">About</string>
+    <string name="error">Error</string>
+    <string name="errortext">An application error occurred. Please quit the game and try again.</string>
+    <string name="application_error">Application error: %1$s</string>
+	<string name="about_title">About this App</string>
+	<string name="about_text">Fishing Cat by SimplyApps.info\n\nVersion: {0}</string>
+	
+    <string name="update_title">Update available</string>
+    <string name="update_text">Please update to the new version.</string>
+    <string name="check_title">Update check required</string>
+    <string name="check_text">Could not check for required updates. Please check your internet connectivity.</string>
+    <string name="change_while_playing">Cannot change setting while a game is active.</string>
+    
+    <string name="empty"></string>
+    
+
+    <string name="menubutton_"></string>
+    <string name="menubutton_start">START</string>
+    <string name="menubutton_start_tournament">TOURNAMENT</string>
+    <string name="menubutton_start_single">SINGLE</string>
+    <string name="menubutton_options">MENU</string>
+    <string name="menubutton_settings">SETTINGS</string>
+    <string name="menubutton_trophies">TROPHIES</string>
+    <string name="menubutton_rewards">REWARDS</string>
+    <string name="menubutton_statistic">STATISTIC</string>
+    <string name="menubutton_back">BACK</string>
+    <string name="menubutton_switch_classic">CLASSIC EDITION</string>
+    <string name="menubutton_switch_island">ISLAND EDITION</string>
+    <string name="menubutton_cat_mode">CAT MODE</string>
+    <string name="menubutton_show_help">SHOW HELP</string>
+    <string name="menubutton_lwp">GET WALLPAPER</string>
+    <string name="menubutton_quit">EXIT</string>
+    <string name="menubutton_end">END</string>
+    
+    <string name="menubutton_pause">PAUSE</string>
+    <string name="menubutton_resume">RESUME</string>
+    <string name="menubutton_ext_lives">USE LIVES: {0}</string>
+    <string name="menubutton_ext_time">USE TIME: {0}</string>
+    
+    <string name="message_"></string>
+    <string name="message_trophies">TROPHIES</string>
+    <string name="message_round">ROUND</string>
+    <string name="message_finished">FINISHED</string>
+    <string name="message_rewards">REWARDS</string>
+    <string name="message_lifelost">LIFE LOST</string>
+    <string name="message_pause">PAUSE</string>
+    <string name="message_gameover">GAME OVER</string>
+    <string name="message_continue">CONTINUE WITH NEW LIVES</string>
+    <string name="message_trophy_bronze">BRONZE</string>
+    <string name="message_trophy_silver">SILVER</string>
+    <string name="message_trophy_gold">GOLD</string>
+    <string name="message_menu">MENU</string>
+    <string name="message_options">SETTINGS</string>
+    <string name="message_loading">LOADING</string>
+    <string name="message_ready">GET READY</string>
+    
+    <string name="game_unpause">Continue game</string>
+
+    <string name="options">Options</string>
+    <string name="options_music">Music</string>
+    <string name="options_vibration">Vibration</string>
+    <string name="options_difficulty">Difficulty</string>
+    <string name="difficulty_easy">Easy</string>
+    <string name="difficulty_medium">Medium</string>
+    <string name="difficulty_hard">Hard</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="option_reset">Reset current game</string>
+    <string name="reset_complete">Current game resetted.</string>
+    
+    <string name="statistic_game_total">All Games</string>
+    <string name="statistic_game_best">Last Game</string>
+    
+    <string name="statistic_total_fish">Fish</string>
+    <string name="statistic_total_rare_fish">Rare Fish</string>
+    <string name="statistic_total_games">Games</string>
+    <string name="statistic_total_lives_lost">Lives Lost</string>
+    
+    <string name="statistic_lastgame_fish">Fish</string>
+    <string name="statistic_lastgame_rare_fish">Rare Fish</string>
+    <string name="statistic_lastgame_lives_lost">Lives Lost</string>
+    <string name="value_zero">Fishes: 0</string>
+    <string name="round">Round</string>
+    <string name="fishes">Fishes:</string>
+    <string name="time">Time:</string>
+    <string name="lives">Lives:</string>
+    <string name="game_win">Game End</string>
+    <string name="game_lose">Game Over</string>
+    <string name="live_lost">Life Lost</string>
+   
+    <string name="trophy_0">10000 Fish</string>
+    <string name="trophy_1">1500 Rare Fish</string>
+    <string name="trophy_2">Shark Master</string>
+    <string name="trophy_3">More Fish</string>
+    <string name="trophy_4">Fish Collector</string>
+    <string name="trophy_5">Survivor</string>
+    <string name="trophy_6">Expert Fisher</string>
+    <string name="trophy_7">Master Fisher</string>
+    <string name="trophy_8">Bronze Cup</string>
+    <string name="trophy_9">20000 Fish</string>
+    <string name="trophy_10">2500 Rare Fish</string>
+    <string name="trophy_11">Shark Master</string>
+    <string name="trophy_12">More Fish</string>
+    <string name="trophy_13">Fish Collector</string>
+    <string name="trophy_14">Survivor</string>
+    <string name="trophy_15">Expert Fisher</string>
+    <string name="trophy_16">Master Fisher</string>
+    <string name="trophy_17">Silver Cup</string>
+    <string name="trophy_18">30000 Fish</string>
+    <string name="trophy_19">3500 Rare Fish</string>
+    <string name="trophy_20">Shark Master</string>
+    <string name="trophy_21">More Fish</string>
+    <string name="trophy_22">Fish Collector</string>
+    <string name="trophy_23">Survivor</string>
+    <string name="trophy_24">Expert Fisher</string>
+    <string name="trophy_25">Master Fisher</string>
+    <string name="trophy_26">Gold Cup</string>
+        
+    <string name="m2trophy_0">1000 Fish</string>
+    <string name="m2trophy_1">100 Rare Fish</string>
+    <string name="m2trophy_2">Fish Collector</string>
+    <string name="m2trophy_3">Expert Fisher</string>
+    <string name="m2trophy_4">Master Fisher</string>
+    <string name="m2trophy_5">Bronze Cup</string>
+    <string name="m2trophy_6">1500 Fish</string>
+    <string name="m2trophy_7">200 Rare Fish</string>
+    <string name="m2trophy_8">Fish Collector</string>
+    <string name="m2trophy_9">Expert Fisher</string>
+    <string name="m2trophy_10">Master Fisher</string>
+    <string name="m2trophy_11">Silver Cup</string>
+    <string name="m2trophy_12">2500 Fish</string>
+    <string name="m2trophy_13">300 Rare Fish</string>
+    <string name="m2trophy_14">Fish Collector</string>
+    <string name="m2trophy_15">Expert Fisher</string>
+    <string name="m2trophy_16">Master Fisher</string>
+    <string name="m2trophy_17">Gold Cup</string>
+ 
+    <string name="reward_bronze">3x Shark Escape</string>
+    <string name="reward_silver">More Time</string>
+    <string name="reward_gold">Slower Fishes</string>
+  
+    <string name="m2reward_bronze">Longer Floating</string>
+    <string name="m2reward_silver">More Fishes</string>
+    <string name="m2reward_gold">Slower Speed</string>
+    
+    <string name="btn_help_back">Back</string>
+    <string name="btn_help_close">Close</string>
+    <string name="btn_help_next">Next</string>
+    <string name="help_trophies_long0">Trophy: Fish + Rare Fish\n\nThe amount of fish catched in Game Total overall.</string>
+    <string name="help_trophies_long1">Trophy: Shark Master\n\nBronze: No life lost for 3 games\n\nSilver: No life lost for 6 games\n\nGold: No life lost for 9 games</string>
+    <string name="help_trophies_long2">Trophy: More Fish\n\nCatched more fish in every round in one game\n\nBronze: at least 1 fish more\n\nSilver: at least 10% more\n\nGold: at least 25% more</string>
+    <string name="help_trophies_long3">Trophy: Fish Collector\n\nCatched more fish from one game to the next game\n\nBronze: at least 1 fish more\n\nSilver: at least 10% more\n\nGold: at least 25% more</string>
+    <string name="help_trophies_long4">Trophy: Survivor\n\nSurvived the game with 1 life\n\nBronze: 1 game with 1 life\n\nSilver: 2 games in a row with 1 life\n\nGold: 3 games in a row with 1 life</string>
+    <string name="help_trophies_long5">Trophy: Expert Fisher\n\nCatched a lot of fish in one game\n\nBronze: at least 750\n\nSilver: at least 1000\n\nGold: at least 1250</string>
+    <string name="help_trophies_long6">Trophy: Master Fisher\n\nCatched a lot of rare fish in one game\n\nBronze: at least 75\n\nSilver: at least 100\n\nGold: at least 125</string>
+    <string name="help_trophies_long7">Trophy: Cup\n\nBronze: all bronze trophies\n\nSilver: all Silver trophies\n\nGold: all Gold trophies</string>
+    
+    <string name="m2help_trophies_long0">Trophy: Fish + Rare Fish\n\nThe amount of fish catched in Game Total overall.</string>
+    <string name="m2help_trophies_long1">Trophy: Fish Collector\n\nCatched more fish from one game to the next game\n\nBronze: at least 1 fish more\n\nSilver: at least 5% more\n\nGold: at least 10% more</string>
+    <string name="m2help_trophies_long2">Trophy: Expert Fisher\n\nCatched a lot of fish in one game\n\nBronze: at least 8\n\nSilver: at least 10\n\nGold: at least 12</string>
+    <string name="m2help_trophies_long3">Trophy: Master Fisher\n\nCatched a lot of rare fish in one game\n\nBronze: at least 1\n\nSilver: at least 2\n\nGold: at least 3</string>
+    <string name="m2help_trophies_long4">Trophy: Cup\n\nBronze: all bronze trophies\n\nSilver: all Silver trophies\n\nGold: all Gold trophies</string>
+     
+    
+</resources>
