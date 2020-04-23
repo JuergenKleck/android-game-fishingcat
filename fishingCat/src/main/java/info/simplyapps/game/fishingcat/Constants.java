@@ -10,7 +10,6 @@ public class Constants {
 
     public static final String PACKAGE_NAME = "info.simplyapps.game.fishingcat";
     public static final String PREFERENCE_NS = "http://info.simplyapps.game.fishingcat.rendering";
-    public static final String URI_FISHES_LWP = GOOGLE_PLAY_URL + "info.simplyapps.lwp.fishes";
 
     public static final String CONFIG_VIBRATION = "vibration";
     public static final String CONFIG_MUSIC = "music";
@@ -33,7 +32,6 @@ public class Constants {
     public static final int ACTION_START_SINGLE = 203;
     public static final int ACTION_START_TOURNAMENT = 204;
     public static final int ACTION_HOME = 300;
-    public static final int ACTION_LWP = 301;
     public static final int ACTION_SWITCH = 302;
 
     public static final int spaceLR = 10;
