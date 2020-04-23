@@ -17,23 +17,6 @@ import info.simplyapps.game.fishingcat.storage.StoreDataNew;
  */
 public final class SystemHelper extends info.simplyapps.appengine.SystemHelper {
 
-    public static boolean requireLWP(Context context) {
-        boolean requireLWP = false;
-        PackageManager pm = HomeScreen.class.cast(context).getPackageManager();
-        if(pm != null) {
-            try {
-                PackageInfo pi = pm.getPackageInfo("info.simplyapps.lwp.fishes", 0);
-                if(pi != null) {
-                    requireLWP = false;
-                }
-            } catch (NameNotFoundException e) {
-                requireLWP = true;
-            }
-        }
-        return requireLWP;
-    }
-
-
     public static int getTrophy(int i, boolean text, boolean logo) {
         if(GameValues.GAMESYSTEM_ISLAND == StoreDataNew.getInstance().inventory.gameSystem) {
             return m2Trophy(i, text, logo);

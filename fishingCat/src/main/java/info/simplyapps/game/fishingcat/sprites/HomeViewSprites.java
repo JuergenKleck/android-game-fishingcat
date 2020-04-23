@@ -34,7 +34,6 @@ public class HomeViewSprites implements ViewSprites {
     public Rect rBtnStatistics;
     public Rect rBtnTrophies;
     public Rect rBtnRewards;
-    public Rect rBtnLWP;
 
     // statistic screen
     public Rect rMsgGameTotal;
