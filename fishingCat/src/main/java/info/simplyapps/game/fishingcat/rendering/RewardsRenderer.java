@@ -1,17 +1,5 @@
 package info.simplyapps.game.fishingcat.rendering;
 
-import info.simplyapps.game.fishingcat.Constants;
-import info.simplyapps.game.fishingcat.R;
-import info.simplyapps.game.fishingcat.engine.GameValues;
-import info.simplyapps.game.fishingcat.rendering.kits.Renderkit;
-import info.simplyapps.game.fishingcat.sprites.HomeViewSprites;
-import info.simplyapps.game.fishingcat.storage.StoreDataNew;
-import info.simplyapps.gameengine.EngineConstants;
-import info.simplyapps.gameengine.rendering.kits.ScreenKit;
-import info.simplyapps.gameengine.rendering.kits.ScreenKit.ScreenPosition;
-
-import java.util.Properties;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -22,17 +10,29 @@ import android.graphics.Shader;
 import android.graphics.Shader.TileMode;
 import android.view.MotionEvent;
 
+import java.util.Properties;
+
+import info.simplyapps.game.fishingcat.Constants;
+import info.simplyapps.game.fishingcat.R;
+import info.simplyapps.game.fishingcat.engine.GameValues;
+import info.simplyapps.game.fishingcat.rendering.kits.Renderkit;
+import info.simplyapps.game.fishingcat.sprites.HomeViewSprites;
+import info.simplyapps.game.fishingcat.storage.StoreDataNew;
+import info.simplyapps.gameengine.EngineConstants;
+import info.simplyapps.gameengine.rendering.kits.ScreenKit;
+import info.simplyapps.gameengine.rendering.kits.ScreenKit.ScreenPosition;
+
 public class RewardsRenderer extends FishRendererTemplate {
 
     long lastTime = 0l;
-    
+
     String mTextBronze;
     String mTextSilver;
     String mTextGold;
     boolean mHasBronze;
     boolean mHasSilver;
     boolean mHasGold;
-    
+
     public RewardsRenderer(Context context, Properties p) {
         super(context, p);
     }
@@ -55,9 +55,9 @@ public class RewardsRenderer extends FishRendererTemplate {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(delayedAction == EngineConstants.ACTION_NONE) {
+        if (delayedAction == EngineConstants.ACTION_NONE) {
             // determine button click
-        
+
             switch (event.getAction() & MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_MOVE:
                     // move
@@ -65,17 +65,17 @@ public class RewardsRenderer extends FishRendererTemplate {
                 case MotionEvent.ACTION_DOWN:
                     break;
                 case MotionEvent.ACTION_UP:
-                    if(containsClick(getSprites().rBtnBack, event.getX(), event.getY())) {
+                    if (containsClick(getSprites().rBtnBack, event.getX(), event.getY())) {
                         delayedActionHandler(EngineConstants.ACTION_OPTIONS, EngineConstants.ACTION_OPTIONS);
                     }
-            break;
+                    break;
             }
-            
+
         }
 
         return true;
     }
-    
+
     @Override
     public void doUpdateRenderState() {
         final long time = System.currentTimeMillis();
@@ -85,49 +85,49 @@ public class RewardsRenderer extends FishRendererTemplate {
 
     @Override
     public void doDrawRenderer(Canvas canvas) {
-        
-        if(getSprites().gBackground != null) {
-            getSprites().gBackground.image.setBounds(0,0,screenWidth,screenHeight);
+
+        if (getSprites().gBackground != null) {
+            getSprites().gBackground.image.setBounds(0, 0, screenWidth, screenHeight);
             getSprites().gBackground.image.draw(canvas);
         }
-        if(getSprites().pBackground != null) {
-            canvas.drawRect(getSprites().rBackground, getSprites().pBackground); 
+        if (getSprites().pBackground != null) {
+            canvas.drawRect(getSprites().rBackground, getSprites().pBackground);
         }
 
         drawText(canvas, getSprites().rMsgRewards, mContext.getString(R.string.message_rewards), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
-        
-        if(getSprites().gRewardBronzeCategory != null) {
+
+        if (getSprites().gRewardBronzeCategory != null) {
             getSprites().gRewardBronzeCategory.image.draw(canvas);
             getSprites().gRewardBronzeLogo.image.draw(canvas);
             drawText(canvas, getSprites().rMsgRewardBronze, mTextBronze, ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight), mHasBronze ? GameValues.cFilterBronze : GameValues.cFilterInactive);
-            if(!mHasBronze) {
+            if (!mHasBronze) {
                 getSprites().gNotYet.image.setBounds(getSprites().gRewardBronzeCategory.image.copyBounds());
                 getSprites().gNotYet.image.draw(canvas);
             }
         }
-        if(getSprites().gRewardSilverCategory != null) {
+        if (getSprites().gRewardSilverCategory != null) {
             getSprites().gRewardSilverCategory.image.draw(canvas);
             getSprites().gRewardSilverLogo.image.draw(canvas);
             drawText(canvas, getSprites().rMsgRewardSilver, mTextSilver, ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight), mHasSilver ? GameValues.cFilterSilver : GameValues.cFilterInactive);
-            if(!mHasSilver) {
+            if (!mHasSilver) {
                 getSprites().gNotYet.image.setBounds(getSprites().gRewardSilverCategory.image.copyBounds());
                 getSprites().gNotYet.image.draw(canvas);
             }
         }
-        if(getSprites().gRewardGoldCategory != null) {
+        if (getSprites().gRewardGoldCategory != null) {
             getSprites().gRewardGoldCategory.image.draw(canvas);
             getSprites().gRewardGoldLogo.image.draw(canvas);
             drawText(canvas, getSprites().rMsgRewardGold, mTextGold, ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight), mHasGold ? GameValues.cFilterGold : GameValues.cFilterInactive);
-            if(!mHasGold) {
+            if (!mHasGold) {
                 getSprites().gNotYet.image.setBounds(getSprites().gRewardGoldCategory.image.copyBounds());
                 getSprites().gNotYet.image.draw(canvas);
             }
         }
-        
+
         choiceBaseDraw(canvas, getSprites().rBtnBack, getSprites().gButtonOverlay, getSprites().gButton, activeButton, EngineConstants.ACTION_OPTIONS, GameValues.cFilterGreen);
         drawText(canvas, getSprites().rBtnBack, mContext.getString(R.string.menubutton_back), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
     }
-    
+
 
     @Override
     public void restoreGameState() {
@@ -142,7 +142,7 @@ public class RewardsRenderer extends FishRendererTemplate {
         super.sprites = new HomeViewSprites();
 
         Shader shader = new LinearGradient(0, 0, screenWidth, realScreenHeight, Color.parseColor("#bdcce3"), Color.parseColor("#0598ff"), TileMode.CLAMP);
-        getSprites().pBackground = new Paint(); 
+        getSprites().pBackground = new Paint();
         getSprites().pBackground.setShader(shader);
         getSprites().rBackground = new Rect(0, 0, screenWidth, realScreenHeight);
 
@@ -152,7 +152,7 @@ public class RewardsRenderer extends FishRendererTemplate {
 
         getSprites().rBtnBack = getSprites().gButton.image.copyBounds();
         ScreenKit.scaleRect(screenWidth, screenHeight, ScreenPosition.BOTTOM_LEFT, 0.25f, 50, 25, getSprites().rBtnBack);
-        
+
         getSprites().rMsgRewards = getSprites().gButton.image.copyBounds();
         getSprites().rMsgRewardBronze = getSprites().gButton.image.copyBounds();
         getSprites().rMsgRewardSilver = getSprites().gButton.image.copyBounds();
@@ -184,74 +184,76 @@ public class RewardsRenderer extends FishRendererTemplate {
         ScreenKit.scaleImage(screenWidth, screenHeight, ScreenPosition.TOP_LEFT, 0.055f, 170, 660, getSprites().gRewardGoldLogo);
 
         getSprites().gNotYet = Renderkit.loadGraphic(mContext.getResources(), R.drawable.trophy_not_yet, 0, 0);
-        
-        if(GameValues.GAMESYSTEM_ISLAND == StoreDataNew.getInstance().inventory.gameSystem) {
+
+        if (GameValues.GAMESYSTEM_ISLAND == StoreDataNew.getInstance().inventory.gameSystem) {
             mHasBronze = StoreDataNew.getInstance().gameData2.rewards != null && StoreDataNew.getInstance().gameData2.rewards[StoreDataNew.getInstance().gameData2.difficulty].length > 0 && StoreDataNew.getInstance().gameData2.rewards[StoreDataNew.getInstance().gameData2.difficulty][0];
         } else {
             mHasBronze = StoreDataNew.getInstance().gameData1.rewards != null && StoreDataNew.getInstance().gameData1.rewards[StoreDataNew.getInstance().gameData1.difficulty].length > 0 && StoreDataNew.getInstance().gameData1.rewards[StoreDataNew.getInstance().gameData1.difficulty][0];
         }
-        if(GameValues.GAMESYSTEM_ISLAND == StoreDataNew.getInstance().inventory.gameSystem) {
+        if (GameValues.GAMESYSTEM_ISLAND == StoreDataNew.getInstance().inventory.gameSystem) {
             mHasSilver = StoreDataNew.getInstance().gameData2.rewards != null && StoreDataNew.getInstance().gameData2.rewards[StoreDataNew.getInstance().gameData2.difficulty].length > 1 && StoreDataNew.getInstance().gameData2.rewards[StoreDataNew.getInstance().gameData2.difficulty][1];
         } else {
             mHasSilver = StoreDataNew.getInstance().gameData1.rewards != null && StoreDataNew.getInstance().gameData1.rewards[StoreDataNew.getInstance().gameData1.difficulty].length > 1 && StoreDataNew.getInstance().gameData1.rewards[StoreDataNew.getInstance().gameData1.difficulty][1];
         }
-        if(GameValues.GAMESYSTEM_ISLAND == StoreDataNew.getInstance().inventory.gameSystem) {
+        if (GameValues.GAMESYSTEM_ISLAND == StoreDataNew.getInstance().inventory.gameSystem) {
             mHasGold = StoreDataNew.getInstance().gameData2.rewards != null && StoreDataNew.getInstance().gameData2.rewards[StoreDataNew.getInstance().gameData2.difficulty].length > 2 && StoreDataNew.getInstance().gameData2.rewards[StoreDataNew.getInstance().gameData2.difficulty][2];
         } else {
             mHasGold = StoreDataNew.getInstance().gameData1.rewards != null && StoreDataNew.getInstance().gameData1.rewards[StoreDataNew.getInstance().gameData1.difficulty].length > 2 && StoreDataNew.getInstance().gameData1.rewards[StoreDataNew.getInstance().gameData1.difficulty][2];
         }
-       
-        
+
+
     }
-    
-    
+
+
     public int getReward(int i, boolean text, boolean logo) {
-        if(GameValues.GAMESYSTEM_ISLAND == StoreDataNew.getInstance().inventory.gameSystem) {
+        if (GameValues.GAMESYSTEM_ISLAND == StoreDataNew.getInstance().inventory.gameSystem) {
             return m2Reward(i, text, logo);
         } else {
             return m1Reward(i, text, logo);
         }
     }
+
     private int m1Reward(int i, boolean text, boolean logo) {
         switch (i) {
-        case 0:
-            if(text) return R.string.reward_bronze;
-            if(logo) return R.drawable.trophy_fish;
-            return R.drawable.trophy_bronze;
-        case 1:
-            if(text) return R.string.reward_silver;
-            if(logo) return R.drawable.reward_time;
-            return R.drawable.trophy_silver;
-        case 2:
-            if(text) return R.string.reward_gold;
-            if(logo) return R.drawable.reward_speed;
-            return R.drawable.trophy_gold;
-        default:
-            return R.drawable.trophy_not_yet;
-        }
-    }
-    private int m2Reward(int i, boolean text, boolean logo) {
-        switch (i) {
-        case 0:
-            if(text) return R.string.m2reward_bronze;
-            if(logo) return R.drawable.reward_time;
-            return R.drawable.trophy_bronze;
-        case 1:
-            if(text) return R.string.m2reward_silver;
-            if(logo) return R.drawable.trophy_fish;
-            return R.drawable.trophy_silver;
-        case 2:
-            if(text) return R.string.m2reward_gold;
-            if(logo) return R.drawable.reward_speed;
-            return R.drawable.trophy_gold;
-        default:
-            return R.drawable.trophy_not_yet;
+            case 0:
+                if (text) return R.string.reward_bronze;
+                if (logo) return R.drawable.trophy_fish;
+                return R.drawable.trophy_bronze;
+            case 1:
+                if (text) return R.string.reward_silver;
+                if (logo) return R.drawable.reward_time;
+                return R.drawable.trophy_silver;
+            case 2:
+                if (text) return R.string.reward_gold;
+                if (logo) return R.drawable.reward_speed;
+                return R.drawable.trophy_gold;
+            default:
+                return R.drawable.trophy_not_yet;
         }
     }
 
-	@Override
-	public void reset() {
-		// TODO Auto-generated method stub
-		
-	}
+    private int m2Reward(int i, boolean text, boolean logo) {
+        switch (i) {
+            case 0:
+                if (text) return R.string.m2reward_bronze;
+                if (logo) return R.drawable.reward_time;
+                return R.drawable.trophy_bronze;
+            case 1:
+                if (text) return R.string.m2reward_silver;
+                if (logo) return R.drawable.trophy_fish;
+                return R.drawable.trophy_silver;
+            case 2:
+                if (text) return R.string.m2reward_gold;
+                if (logo) return R.drawable.reward_speed;
+                return R.drawable.trophy_gold;
+            default:
+                return R.drawable.trophy_not_yet;
+        }
+    }
+
+    @Override
+    public void reset() {
+        // TODO Auto-generated method stub
+
+    }
 }

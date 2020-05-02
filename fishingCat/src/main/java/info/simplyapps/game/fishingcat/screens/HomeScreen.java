@@ -1,22 +1,16 @@
 package info.simplyapps.game.fishingcat.screens;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
-import java.text.MessageFormat;
+import androidx.annotation.NonNull;
+
 import java.util.Properties;
 
-import info.simplyapps.appengine.UpdateCheck;
+import info.simplyapps.appengine.PermissionHelper;
+import info.simplyapps.appengine.screens.IPermissionHandler;
 import info.simplyapps.appengine.storage.dto.Configuration;
 import info.simplyapps.game.fishingcat.Constants;
 import info.simplyapps.game.fishingcat.Constants.RenderMode;
@@ -49,13 +43,15 @@ public class HomeScreen extends HomeScreenTemplate {
 
     public static boolean mGameModeContinue = false;
 
+    protected PermissionHelper permissionHelper = new PermissionHelper();
+
     RenderMode mLastRenderMode;
 
     MediaPlayer mPlayer;
     int mLastPlayed;
 
     public synchronized void prepareStorage(Context context) {
-        StorageUtil.prepareStorage(getApplicationContext());
+        StorageUtil.prepareStorage(context);
     }
 
     @Override
@@ -89,12 +85,7 @@ public class HomeScreen extends HomeScreenTemplate {
     }
 
     public void actionRewards() {
-        getScreenView().changeEngine(new RewardsRenderer(this, getEngineProperties()));
-    }
-
-    public void openGetLWP() {
-        Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.URI_FISHES_LWP));
-        startActivity(marketIntent);
+        getScreenView().changeEngine(new RewardsRenderer(getScreenView().getContext(), getEngineProperties()));
     }
 
     @Override
@@ -115,7 +106,7 @@ public class HomeScreen extends HomeScreenTemplate {
 
     @Override
     public void actionOptions() {
-        getScreenView().changeEngine(new MenuRenderer(this, getEngineProperties()));
+        getScreenView().changeEngine(new MenuRenderer(getScreenView().getContext(), getEngineProperties()));
     }
 
     @Override
@@ -147,9 +138,6 @@ public class HomeScreen extends HomeScreenTemplate {
             case Constants.ACTION_SWITCH:
                 actionSwitch();
                 break;
-            case Constants.ACTION_LWP:
-                actionLWP();
-                break;
             case Constants.ACTION_SETTINGS:
                 actionSettings();
                 break;
@@ -166,15 +154,15 @@ public class HomeScreen extends HomeScreenTemplate {
     }
 
     public void actionSettings() {
-        getScreenView().changeEngine(new OptionRenderer(this, getEngineProperties()));
+        getScreenView().changeEngine(new OptionRenderer(getScreenView().getContext(), getEngineProperties()));
     }
 
     public void actionStatistic() {
-        getScreenView().changeEngine(new StatisticRenderer(this, getEngineProperties()));
+        getScreenView().changeEngine(new StatisticRenderer(getScreenView().getContext(), getEngineProperties()));
     }
 
     public void actionTrophies() {
-        getScreenView().changeEngine(new TrophiesRenderer(this, getEngineProperties()));
+        getScreenView().changeEngine(new TrophiesRenderer(getScreenView().getContext(), getEngineProperties()));
     }
 
     public void actionGameMode1() {
@@ -195,10 +183,6 @@ public class HomeScreen extends HomeScreenTemplate {
         activateGame();
     }
 
-    public void actionLWP() {
-        openGetLWP();
-    }
-
     public void actionSwitch() {
         if (GameValues.GAMESYSTEM_ISLAND == StoreDataNew.getInstance().inventory.gameSystem) {
             StoreDataNew.getInstance().inventory.gameSystem = GameValues.GAMESYSTEM_CLASSIC;
@@ -213,13 +197,13 @@ public class HomeScreen extends HomeScreenTemplate {
     public void actionHome() {
         if (getGameEngine() != null) {
             getScreenView().getBasicEngine().saveGameState();
-            getScreenView().changeEngine(new LoadingRenderer(this, getEngineProperties()));
+            getScreenView().changeEngine(new LoadingRenderer(getScreenView().getContext(), getEngineProperties()));
         }
 
         if (GameValues.GAMESYSTEM_ISLAND == StoreDataNew.getInstance().inventory.gameSystem) {
-            getScreenView().changeEngine(new Home2Renderer(this, getEngineProperties()));
+            getScreenView().changeEngine(new Home2Renderer(getScreenView().getContext(), getEngineProperties()));
         } else {
-            getScreenView().changeEngine(new Home1Renderer(this, getEngineProperties()));
+            getScreenView().changeEngine(new Home1Renderer(getScreenView().getContext(), getEngineProperties()));
         }
     }
 
@@ -227,60 +211,14 @@ public class HomeScreen extends HomeScreenTemplate {
         if (mLastRenderMode != null && RenderMode.GAME1.equals(mLastRenderMode)) {
             mLastRenderMode = null;
             if (GameValues.GAMESYSTEM_ISLAND == StoreDataNew.getInstance().inventory.gameSystem) {
-                getScreenView().changeEngine(new GameModeIsland(this, getEngineProperties()));
+                getScreenView().changeEngine(new GameModeIsland(getScreenView().getContext(), getEngineProperties()));
             } else {
-                getScreenView().changeEngine(new GameModeClassicTournament(this, getEngineProperties()));
+                getScreenView().changeEngine(new GameModeClassicTournament(getScreenView().getContext(), getEngineProperties()));
             }
             getScreenView().getBasicEngine().unpause();
         } else {
             actionOptions();
         }
-    }
-
-
-    private void actionAbout() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.about_title);
-        try {
-            builder.setMessage(MessageFormat.format(getString(R.string.about_text), getPackageManager().getPackageInfo(getPackageName(), 0).versionName))
-                    .setCancelable(false);
-        } catch (NameNotFoundException e) {
-            builder.setMessage(MessageFormat.format(getString(R.string.about_text), ""))
-                    .setCancelable(false);
-        }
-        builder.setNeutralButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        });
-
-        AlertDialog alert = builder.create();
-        alert.show();
-    }
-
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.appmenu, menu);
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_about: {
-                actionAbout();
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override
@@ -300,12 +238,6 @@ public class HomeScreen extends HomeScreenTemplate {
 
     @Override
     public void doUpdateChecks() {
-        if (UpdateCheck.requiresCheck(StoreDataNew.getInstance())) {
-            new UpdateCheck().execute(Constants.UPDATE_CHECK_URL);
-        }
-        if (UpdateCheck.requiresUpdate(StoreDataNew.getInstance())) {
-            UpdateCheck.showRemindLaterDialog(this, getPackageName());
-        }
     }
 
     @Override
@@ -313,15 +245,15 @@ public class HomeScreen extends HomeScreenTemplate {
         mGameModeContinue = true;
 
         // ONE GAME SCREEN
-        getScreenView().changeEngine(new LoadingRenderer(this, getEngineProperties()));
+        getScreenView().changeEngine(new LoadingRenderer(getScreenView().getContext(), getEngineProperties()));
 
         // install renderer
         if (GameValues.GAMESYSTEM_ISLAND == StoreDataNew.getInstance().inventory.gameSystem) {
-            getScreenView().changeEngine(new GameModeIsland(this, getEngineProperties()));
+            getScreenView().changeEngine(new GameModeIsland(getScreenView().getContext(), getEngineProperties()));
         } else if (GameValues.GAMESYSTEM_CLASSIC_SINGLE == StoreDataNew.getInstance().inventory.gameSystem) {
-            getScreenView().changeEngine(new GameModeClassicSingle(this, getEngineProperties()));
+            getScreenView().changeEngine(new GameModeClassicSingle(getScreenView().getContext(), getEngineProperties()));
         } else {
-            getScreenView().changeEngine(new GameModeClassicTournament(this, getEngineProperties()));
+            getScreenView().changeEngine(new GameModeClassicTournament(getScreenView().getContext(), getEngineProperties()));
         }
 
         // start renderer
@@ -335,10 +267,6 @@ public class HomeScreen extends HomeScreenTemplate {
      */
     public GameEngine getGameEngine() {
         return GameEngine.class.isInstance(mScreenView.getBasicEngine()) ? GameEngine.class.cast(mScreenView.getBasicEngine()) : null;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     }
 
     public void assignMediaPlayer(Context context, int id) {
@@ -378,4 +306,15 @@ public class HomeScreen extends HomeScreenTemplate {
         return p;
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (getScreenView().getBasicEngine() instanceof IPermissionHandler) {
+            permissionHelper.onRequestPermissionsResult((IPermissionHandler) getScreenView().getBasicEngine(), requestCode, permissions, grantResults);
+        }
+    }
+
+    public PermissionHelper getPermissionHelper() {
+        return permissionHelper;
+    }
 }

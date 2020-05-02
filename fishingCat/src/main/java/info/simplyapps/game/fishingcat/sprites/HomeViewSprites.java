@@ -14,7 +14,7 @@ public class HomeViewSprites implements ViewSprites {
     public Graphic gLogo;
     public Paint pBackground;
     public Rect rBackground;
-    
+
     // generic buttons
     public Graphic gButton;
     public Graphic gButtonOverlay;
@@ -34,7 +34,6 @@ public class HomeViewSprites implements ViewSprites {
     public Rect rBtnStatistics;
     public Rect rBtnTrophies;
     public Rect rBtnRewards;
-    public Rect rBtnLWP;
 
     // statistic screen
     public Rect rMsgGameTotal;
@@ -53,7 +52,7 @@ public class HomeViewSprites implements ViewSprites {
     public Rect rValueLastGameRareFish;
     public Rect rMsgLastGameLivesLost;
     public Rect rValueLastGameLivesLost;
-    
+
     // option screen
     public Rect rMsgOptions;
     public Rect rMsgMusic;
@@ -67,7 +66,7 @@ public class HomeViewSprites implements ViewSprites {
     public Rect rBtnResetGame;
     public Rect rMsgCatMode;
     public Rect rBtnCatMode;
-    
+
     // trophies screen
     public Rect rMsgTrophies;
     public Rect rBtnTrophiesBronze;
@@ -78,7 +77,7 @@ public class HomeViewSprites implements ViewSprites {
     public Graphic[] mTrophiesCategory;
     public Graphic gNotYet;
     public Rect rBtnShowHelp;
-    
+
     // rewards screen
     public Rect rMsgRewards;
     public Rect rMsgRewardBronze;
@@ -93,26 +92,27 @@ public class HomeViewSprites implements ViewSprites {
 
     // loading screen
     public Rect rMessage;
-    
+
     // mode 1
     public Graphic gSeashell;
-	public Graphic gSeagrass;
-	public Graphic[] gSeacrab;
-	public Graphic[] gSeagrass2;
-	public Graphic[] gBubbles;
-	public Animation aSeacrab;
-	public Animation aSeagrass2;
-	public Animation aBubbles;
-	
-	// mode 2
-	public Graphic[] gCat;
-	public Animation aCat;
-	
+    public Graphic gSeagrass;
+    public Graphic[] gSeacrab;
+    public Graphic[] gSeagrass2;
+    public Graphic[] gBubbles;
+    public Animation aSeacrab;
+    public Animation aSeagrass2;
+    public Animation aBubbles;
+
+    // mode 2
+    public Graphic[] gCat;
+    public Animation aCat;
+
     @Override
     public void init() {
     }
+
     @Override
     public void clean() {
     }
-	
+
 }

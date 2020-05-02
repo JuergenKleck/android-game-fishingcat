@@ -1,17 +1,5 @@
 package info.simplyapps.game.fishingcat.rendering;
 
-import info.simplyapps.game.fishingcat.Constants;
-import info.simplyapps.game.fishingcat.R;
-import info.simplyapps.game.fishingcat.engine.GameValues;
-import info.simplyapps.game.fishingcat.rendering.kits.Renderkit;
-import info.simplyapps.game.fishingcat.sprites.HomeViewSprites;
-import info.simplyapps.game.fishingcat.storage.StoreDataNew;
-import info.simplyapps.gameengine.EngineConstants;
-import info.simplyapps.gameengine.rendering.kits.ScreenKit;
-import info.simplyapps.gameengine.rendering.kits.ScreenKit.ScreenPosition;
-
-import java.util.Properties;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -22,43 +10,55 @@ import android.graphics.Shader;
 import android.graphics.Shader.TileMode;
 import android.view.MotionEvent;
 
+import java.util.Properties;
+
+import info.simplyapps.game.fishingcat.Constants;
+import info.simplyapps.game.fishingcat.R;
+import info.simplyapps.game.fishingcat.engine.GameValues;
+import info.simplyapps.game.fishingcat.rendering.kits.Renderkit;
+import info.simplyapps.game.fishingcat.sprites.HomeViewSprites;
+import info.simplyapps.game.fishingcat.storage.StoreDataNew;
+import info.simplyapps.gameengine.EngineConstants;
+import info.simplyapps.gameengine.rendering.kits.ScreenKit;
+import info.simplyapps.gameengine.rendering.kits.ScreenKit.ScreenPosition;
+
 public class StatisticRenderer extends FishRendererTemplate {
 
     long lastTime = 0l;
-    
+
     int totalFish;
     int totalRareFish;
     int totalGames;
     int totalLivesLost;
     int lastGameFish;
     int lastGameRareFish;
-    int lastGameLivesLost;    
+    int lastGameLivesLost;
 
-	public StatisticRenderer(Context context, Properties p) {
-		super(context, p);
-	}
+    public StatisticRenderer(Context context, Properties p) {
+        super(context, p);
+    }
 
-	public HomeViewSprites getSprites() {
-		return HomeViewSprites.class.cast(super.sprites);
-	}
+    public HomeViewSprites getSprites() {
+        return HomeViewSprites.class.cast(super.sprites);
+    }
 
-	@Override
-	public void doStart() {
-	}
+    @Override
+    public void doStart() {
+    }
 
-	@Override
-	public void pause() {
-	}
+    @Override
+    public void pause() {
+    }
 
-	@Override
-	public void unpause() {
-	}
+    @Override
+    public void unpause() {
+    }
 
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-        if(delayedAction == EngineConstants.ACTION_NONE) {
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (delayedAction == EngineConstants.ACTION_NONE) {
             // determine button click
-        
+
             switch (event.getAction() & MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_MOVE:
                     // move
@@ -66,33 +66,33 @@ public class StatisticRenderer extends FishRendererTemplate {
                 case MotionEvent.ACTION_DOWN:
                     break;
                 case MotionEvent.ACTION_UP:
-                    if(containsClick(getSprites().rBtnBack, event.getX(), event.getY())) {
+                    if (containsClick(getSprites().rBtnBack, event.getX(), event.getY())) {
                         delayedActionHandler(EngineConstants.ACTION_OPTIONS, EngineConstants.ACTION_OPTIONS);
                     }
-            break;
+                    break;
             }
-            
+
         }
 
         return true;
     }
-	
-	@Override
-	public void doUpdateRenderState() {
-	    final long time = System.currentTimeMillis();
 
-	    lastTime = time;
-	}
+    @Override
+    public void doUpdateRenderState() {
+        final long time = System.currentTimeMillis();
 
-	@Override
-	public void doDrawRenderer(Canvas canvas) {
-  
-        if(getSprites().gBackground != null) {
-            getSprites().gBackground.image.setBounds(0,0,screenWidth,screenHeight);
+        lastTime = time;
+    }
+
+    @Override
+    public void doDrawRenderer(Canvas canvas) {
+
+        if (getSprites().gBackground != null) {
+            getSprites().gBackground.image.setBounds(0, 0, screenWidth, screenHeight);
             getSprites().gBackground.image.draw(canvas);
         }
-        if(getSprites().pBackground != null) {
-            canvas.drawRect(getSprites().rBackground, getSprites().pBackground); 
+        if (getSprites().pBackground != null) {
+            canvas.drawRect(getSprites().rBackground, getSprites().pBackground);
         }
 
         drawText(canvas, getSprites().rMsgGameTotal, mContext.getString(R.string.statistic_game_total), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
@@ -102,43 +102,43 @@ public class StatisticRenderer extends FishRendererTemplate {
         drawTextUnbounded(canvas, getSprites().rValueTotalRareFish, Integer.toString(totalRareFish), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
         drawText(canvas, getSprites().rMsgTotalGames, mContext.getString(R.string.statistic_total_games), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
         drawTextUnbounded(canvas, getSprites().rValueTotalGames, Integer.toString(totalGames), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
-        
-        
+
+
         drawText(canvas, getSprites().rMsgGameLast, mContext.getString(R.string.statistic_game_best), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
         drawText(canvas, getSprites().rMsgLastGameFish, mContext.getString(R.string.statistic_lastgame_fish), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
         drawTextUnbounded(canvas, getSprites().rValueLastGameFish, Integer.toString(lastGameFish), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
         drawText(canvas, getSprites().rMsgLastGameRareFish, mContext.getString(R.string.statistic_lastgame_rare_fish), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
         drawTextUnbounded(canvas, getSprites().rValueLastGameRareFish, Integer.toString(lastGameRareFish), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
-	
-        if(StoreDataNew.getInstance() != null) {
-            if(GameValues.GAMESYSTEM_CLASSIC == StoreDataNew.getInstance().inventory.gameSystem) {
+
+        if (StoreDataNew.getInstance() != null) {
+            if (GameValues.GAMESYSTEM_CLASSIC == StoreDataNew.getInstance().inventory.gameSystem) {
                 drawText(canvas, getSprites().rMsgTotalLivesLost, mContext.getString(R.string.statistic_total_lives_lost), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
                 drawTextUnbounded(canvas, getSprites().rValueTotalLivesLost, Integer.toString(totalLivesLost), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
                 drawText(canvas, getSprites().rMsgLastGameLivesLost, mContext.getString(R.string.statistic_lastgame_lives_lost), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
                 drawTextUnbounded(canvas, getSprites().rValueLastGameLivesLost, Integer.toString(lastGameLivesLost), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
             }
         }
-        
- 
+
+
         choiceBaseDraw(canvas, getSprites().rBtnBack, getSprites().gButtonOverlay, getSprites().gButton, activeButton, EngineConstants.ACTION_OPTIONS, GameValues.cFilterGreen);
         drawText(canvas, getSprites().rBtnBack, mContext.getString(R.string.menubutton_back), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
-	}
-	
+    }
 
-	@Override
-	public void restoreGameState() {
-	}
 
-	@Override
-	public void saveGameState() {
-	}
+    @Override
+    public void restoreGameState() {
+    }
 
-	@Override
+    @Override
+    public void saveGameState() {
+    }
+
+    @Override
     public void doInitThread(long time) {
-		super.sprites = new HomeViewSprites();
+        super.sprites = new HomeViewSprites();
 
         Shader shader = new LinearGradient(0, 0, screenWidth, realScreenHeight, Color.parseColor("#bdcce3"), Color.parseColor("#0598ff"), TileMode.CLAMP);
-        getSprites().pBackground = new Paint(); 
+        getSprites().pBackground = new Paint();
         getSprites().pBackground.setShader(shader);
         getSprites().rBackground = new Rect(0, 0, screenWidth, realScreenHeight);
 
@@ -148,7 +148,7 @@ public class StatisticRenderer extends FishRendererTemplate {
 
         getSprites().rBtnBack = getSprites().gButton.image.copyBounds();
         ScreenKit.scaleRect(screenWidth, screenHeight, ScreenPosition.BOTTOM_LEFT, 0.25f, 50, 25, getSprites().rBtnBack);
-        
+
         getSprites().rMsgGameTotal = getSprites().gButton.image.copyBounds();
         getSprites().rMsgTotalFish = getSprites().gButton.image.copyBounds();
         getSprites().rValueTotalFish = getSprites().gButton.image.copyBounds();
@@ -175,7 +175,7 @@ public class StatisticRenderer extends FishRendererTemplate {
         ScreenKit.scaleRect(screenWidth, screenHeight, ScreenPosition.TOP_LEFT, 0.23f, 140, 520, getSprites().rValueTotalGames);
         ScreenKit.scaleRect(screenWidth, screenHeight, ScreenPosition.TOP_LEFT, 0.25f, 20, 680, getSprites().rMsgTotalLivesLost);
         ScreenKit.scaleRect(screenWidth, screenHeight, ScreenPosition.TOP_LEFT, 0.23f, 140, 680, getSprites().rValueTotalLivesLost);
-        
+
         ScreenKit.scaleRect(screenWidth, screenHeight, ScreenPosition.TOP_LEFT, 0.4f, 280, 20, getSprites().rMsgGameLast);
         ScreenKit.scaleRect(screenWidth, screenHeight, ScreenPosition.TOP_LEFT, 0.25f, 280, 200, getSprites().rMsgLastGameFish);
         ScreenKit.scaleRect(screenWidth, screenHeight, ScreenPosition.TOP_LEFT, 0.23f, 410, 200, getSprites().rValueLastGameFish);
@@ -184,15 +184,15 @@ public class StatisticRenderer extends FishRendererTemplate {
         ScreenKit.scaleRect(screenWidth, screenHeight, ScreenPosition.TOP_LEFT, 0.25f, 280, 520, getSprites().rMsgLastGameLivesLost);
         ScreenKit.scaleRect(screenWidth, screenHeight, ScreenPosition.TOP_LEFT, 0.23f, 410, 520, getSprites().rValueLastGameLivesLost);
 
-        
-        if(StoreDataNew.getInstance() != null) {
-            if(GameValues.GAMESYSTEM_ISLAND == StoreDataNew.getInstance().inventory.gameSystem) {
+
+        if (StoreDataNew.getInstance() != null) {
+            if (GameValues.GAMESYSTEM_ISLAND == StoreDataNew.getInstance().inventory.gameSystem) {
                 totalFish = StoreDataNew.getInstance().gameData2.totalFish[StoreDataNew.getInstance().gameData2.difficulty];
                 totalRareFish = StoreDataNew.getInstance().gameData2.totalRareFish[StoreDataNew.getInstance().gameData2.difficulty];
                 totalGames = StoreDataNew.getInstance().gameData2.totalGames[StoreDataNew.getInstance().gameData2.difficulty];
                 lastGameFish = StoreDataNew.getInstance().gameData2.lastGameFish[StoreDataNew.getInstance().gameData2.difficulty];
                 lastGameRareFish = StoreDataNew.getInstance().gameData2.lastGameRareFish[StoreDataNew.getInstance().gameData2.difficulty];
-             } else {
+            } else {
                 totalFish = StoreDataNew.getInstance().gameData1.totalFish[StoreDataNew.getInstance().gameData1.difficulty];
                 totalRareFish = StoreDataNew.getInstance().gameData1.totalRareFish[StoreDataNew.getInstance().gameData1.difficulty];
                 totalGames = StoreDataNew.getInstance().gameData1.totalGames[StoreDataNew.getInstance().gameData1.difficulty];
@@ -202,13 +202,13 @@ public class StatisticRenderer extends FishRendererTemplate {
                 lastGameLivesLost = StoreDataNew.getInstance().gameData1.lastGameLivesLost[StoreDataNew.getInstance().gameData1.difficulty];
             }
         }
-        
-	}
 
-	@Override
-	public void reset() {
-		// TODO Auto-generated method stub
-		
-	}
-	
+    }
+
+    @Override
+    public void reset() {
+        // TODO Auto-generated method stub
+
+    }
+
 }
