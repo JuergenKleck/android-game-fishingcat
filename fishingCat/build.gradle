@@ -18,10 +18,10 @@ android {
 
     defaultConfig {
         applicationId "info.simplyapps.game.fishingcat"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 29
-        versionCode 14
-        versionName "1.5.0"
+        versionCode 15
+        versionName "1.5.1"
         signingConfig signingConfigs.release
     }
     compileOptions {

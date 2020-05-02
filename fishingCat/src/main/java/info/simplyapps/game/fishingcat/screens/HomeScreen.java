@@ -1,21 +1,16 @@
 package info.simplyapps.game.fishingcat.screens;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
-import java.text.MessageFormat;
+import androidx.annotation.NonNull;
+
 import java.util.Properties;
 
+import info.simplyapps.appengine.PermissionHelper;
+import info.simplyapps.appengine.screens.IPermissionHandler;
 import info.simplyapps.appengine.storage.dto.Configuration;
 import info.simplyapps.game.fishingcat.Constants;
 import info.simplyapps.game.fishingcat.Constants.RenderMode;
@@ -47,6 +42,8 @@ public class HomeScreen extends HomeScreenTemplate {
     public static String ICICLE_KEY = "fishingcat-view";
 
     public static boolean mGameModeContinue = false;
+
+    protected PermissionHelper permissionHelper = new PermissionHelper();
 
     RenderMode mLastRenderMode;
 
@@ -114,7 +111,7 @@ public class HomeScreen extends HomeScreenTemplate {
 
     @Override
     public void actionQuit() {
-
+        finish();
     }
 
     @Override
@@ -309,4 +306,15 @@ public class HomeScreen extends HomeScreenTemplate {
         return p;
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (getScreenView().getBasicEngine() instanceof IPermissionHandler) {
+            permissionHelper.onRequestPermissionsResult((IPermissionHandler) getScreenView().getBasicEngine(), requestCode, permissions, grantResults);
+        }
+    }
+
+    public PermissionHelper getPermissionHelper() {
+        return permissionHelper;
+    }
 }

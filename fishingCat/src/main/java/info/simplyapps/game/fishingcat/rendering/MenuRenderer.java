@@ -53,9 +53,9 @@ public class MenuRenderer extends FishRendererTemplate {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(delayedAction == EngineConstants.ACTION_NONE) {
+        if (delayedAction == EngineConstants.ACTION_NONE) {
             // determine button click
-        
+
             switch (event.getAction() & MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_MOVE:
                     // move
@@ -63,29 +63,29 @@ public class MenuRenderer extends FishRendererTemplate {
                 case MotionEvent.ACTION_DOWN:
                     break;
                 case MotionEvent.ACTION_UP:
-                    if(containsClick(getSprites().rBtnSettings, event.getX(), event.getY())) {
+                    if (containsClick(getSprites().rBtnSettings, event.getX(), event.getY())) {
                         delayedActionHandler(Constants.ACTION_SETTINGS, Constants.ACTION_SETTINGS);
                     }
-                    if(containsClick(getSprites().rBtnStatistics, event.getX(), event.getY())) {
+                    if (containsClick(getSprites().rBtnStatistics, event.getX(), event.getY())) {
                         delayedActionHandler(Constants.ACTION_STATISTIC, Constants.ACTION_STATISTIC);
                     }
-                    if(containsClick(getSprites().rBtnRewards, event.getX(), event.getY())) {
+                    if (containsClick(getSprites().rBtnRewards, event.getX(), event.getY())) {
                         delayedActionHandler(Constants.ACTION_REWARDS, Constants.ACTION_REWARDS);
                     }
-                    if(containsClick(getSprites().rBtnTrophies, event.getX(), event.getY())) {
+                    if (containsClick(getSprites().rBtnTrophies, event.getX(), event.getY())) {
                         delayedActionHandler(Constants.ACTION_TROPHIES, Constants.ACTION_TROPHIES);
                     }
-                    if(containsClick(getSprites().rBtnBack, event.getX(), event.getY())) {
+                    if (containsClick(getSprites().rBtnBack, event.getX(), event.getY())) {
                         delayedActionHandler(Constants.ACTION_HOME, Constants.ACTION_HOME);
                     }
-            break;
+                    break;
             }
-            
+
         }
 
         return true;
     }
-    
+
     @Override
     public void doUpdateRenderState() {
         final long time = System.currentTimeMillis();
@@ -95,18 +95,18 @@ public class MenuRenderer extends FishRendererTemplate {
 
     @Override
     public void doDrawRenderer(Canvas canvas) {
-        
-        if(getSprites().gBackground != null) {
-            getSprites().gBackground.image.setBounds(0,0,screenWidth,screenHeight);
+
+        if (getSprites().gBackground != null) {
+            getSprites().gBackground.image.setBounds(0, 0, screenWidth, screenHeight);
             getSprites().gBackground.image.draw(canvas);
         }
-        if(getSprites().pBackground != null) {
-            canvas.drawRect(getSprites().rBackground, getSprites().pBackground); 
+        if (getSprites().pBackground != null) {
+            canvas.drawRect(getSprites().rBackground, getSprites().pBackground);
         }
 
         drawText(canvas, getSprites().rMsgMenu, mContext.getString(R.string.message_menu), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
 
-        if(Constants.RenderMode.MENU == mRenderMode) {
+        if (Constants.RenderMode.MENU == mRenderMode) {
 
             choiceBaseDraw(canvas, getSprites().rBtnSettings, getSprites().gButtonOverlay, getSprites().gButton, activeButton, Constants.ACTION_SETTINGS, GameValues.cFilterBlue);
             choiceBaseDraw(canvas, getSprites().rBtnStatistics, getSprites().gButtonOverlay, getSprites().gButton, activeButton, Constants.ACTION_STATISTIC, GameValues.cFilterBlue);
@@ -118,11 +118,11 @@ public class MenuRenderer extends FishRendererTemplate {
             drawText(canvas, getSprites().rBtnTrophies, mContext.getString(R.string.menubutton_trophies), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
             drawText(canvas, getSprites().rBtnRewards, mContext.getString(R.string.menubutton_rewards), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
         }
-        
+
         choiceBaseDraw(canvas, getSprites().rBtnBack, getSprites().gButtonOverlay, getSprites().gButton, activeButton, Constants.ACTION_HOME, GameValues.cFilterGreen);
         drawText(canvas, getSprites().rBtnBack, mContext.getString(R.string.menubutton_back), ScreenKit.scaleWidth(Constants.spaceLR, screenWidth), ScreenKit.scaleHeight(Constants.spaceTB, screenHeight));
     }
-    
+
 
     @Override
     public void restoreGameState() {
@@ -137,17 +137,17 @@ public class MenuRenderer extends FishRendererTemplate {
         super.sprites = new HomeViewSprites();
 
         Shader shader = new LinearGradient(0, 0, screenWidth, realScreenHeight, Color.parseColor("#bdcce3"), Color.parseColor("#0598ff"), TileMode.CLAMP);
-        getSprites().pBackground = new Paint(); 
+        getSprites().pBackground = new Paint();
         getSprites().pBackground.setShader(shader);
         getSprites().rBackground = new Rect(0, 0, screenWidth, realScreenHeight);
-        
+
         // button backgrounds
         getSprites().gButton = Renderkit.loadButtonGraphic(mContext.getResources(), R.drawable.button_background, 0, 0, EngineConstants.ACTION_NONE);
         getSprites().gButtonOverlay = Renderkit.loadGraphic(mContext.getResources(), R.drawable.button_background, 0, 0);
 
         getSprites().rBtnBack = getSprites().gButton.image.copyBounds();
         ScreenKit.scaleRect(screenWidth, screenHeight, ScreenPosition.BOTTOM_LEFT, 0.25f, 50, 25, getSprites().rBtnBack);
-        
+
         getSprites().rMsgMenu = getSprites().gButton.image.copyBounds();
         getSprites().rBtnSettings = getSprites().gButton.image.copyBounds();
         getSprites().rBtnRewards = getSprites().gButton.image.copyBounds();
@@ -159,16 +159,16 @@ public class MenuRenderer extends FishRendererTemplate {
         ScreenKit.scaleRect(screenWidth, screenHeight, ScreenPosition.TOP_LEFT, 0.34f, 50, 400, getSprites().rBtnRewards);
         ScreenKit.scaleRect(screenWidth, screenHeight, ScreenPosition.TOP_LEFT, 0.34f, 300, 400, getSprites().rBtnTrophies);
     }
-   
+
 
     public synchronized void updateRenderMode(RenderMode renderMode) {
         mRenderMode = renderMode;
     }
 
-	@Override
-	public void reset() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void reset() {
+        // TODO Auto-generated method stub
+
+    }
 
 }

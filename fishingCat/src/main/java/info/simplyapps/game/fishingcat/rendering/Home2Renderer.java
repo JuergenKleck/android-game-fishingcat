@@ -1,21 +1,5 @@
 package info.simplyapps.game.fishingcat.rendering;
 
-import info.simplyapps.game.fishingcat.Constants;
-import info.simplyapps.game.fishingcat.R;
-import info.simplyapps.game.fishingcat.engine.GameValues;
-import info.simplyapps.game.fishingcat.screens.HomeScreen;
-import info.simplyapps.game.fishingcat.rendering.kits.AnimationKit;
-import info.simplyapps.game.fishingcat.rendering.kits.Renderkit;
-import info.simplyapps.game.fishingcat.sprites.HomeViewSprites;
-import info.simplyapps.game.fishingcat.storage.StoreDataNew;
-import info.simplyapps.gameengine.EngineConstants;
-import info.simplyapps.gameengine.rendering.kits.ScreenKit;
-import info.simplyapps.gameengine.rendering.kits.ScreenKit.ScreenPosition;
-import info.simplyapps.gameengine.rendering.objects.Animation;
-import info.simplyapps.gameengine.rendering.objects.Graphic;
-
-import java.util.Properties;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -25,6 +9,21 @@ import android.graphics.Rect;
 import android.graphics.Shader;
 import android.graphics.Shader.TileMode;
 import android.view.MotionEvent;
+
+import java.util.Properties;
+
+import info.simplyapps.game.fishingcat.Constants;
+import info.simplyapps.game.fishingcat.R;
+import info.simplyapps.game.fishingcat.engine.GameValues;
+import info.simplyapps.game.fishingcat.rendering.kits.AnimationKit;
+import info.simplyapps.game.fishingcat.rendering.kits.Renderkit;
+import info.simplyapps.game.fishingcat.sprites.HomeViewSprites;
+import info.simplyapps.game.fishingcat.storage.StoreDataNew;
+import info.simplyapps.gameengine.EngineConstants;
+import info.simplyapps.gameengine.rendering.kits.ScreenKit;
+import info.simplyapps.gameengine.rendering.kits.ScreenKit.ScreenPosition;
+import info.simplyapps.gameengine.rendering.objects.Animation;
+import info.simplyapps.gameengine.rendering.objects.Graphic;
 
 public class Home2Renderer extends FishRendererTemplate {
 
