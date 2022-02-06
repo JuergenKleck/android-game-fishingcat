@@ -11,7 +11,7 @@
     <string name="errortext">An application error occurred. Please quit the game and try again.</string>
     <string name="application_error">Application error: %1$s</string>
 	<string name="about_title">About this App</string>
-	<string name="about_text">Fishing Cat by SimplyApps.info\n\nVersion: {0}</string>
+	<string name="about_text">Fishing Cat\n\nVersion: {0}</string>
 	
     <string name="update_title">Update available</string>
     <string name="update_text">Please update to the new version.</string>
